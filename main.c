@@ -27,16 +27,11 @@ int main(int argc, char **argv) {
     char url[BUFSIZ];
     sprintf(url, "https://www.google.com/search?q=%s", selected_data);
 
-    if (argc > 1) {
-        for (char **browser = argv; *browser != NULL; browser++)
-            execlp(*browser, *browser, url, NULL);
-    }
-
-    char *browsers[] = {
-        "firefox","google-chrome","brave","opera","vivaldi",
-        "midori","falkon","waterfox","palemoon","seamonkey",
-        "epiphany","links","lynx","w3m","chromium",NULL
-    };
+    char *default_browsers[] = {"firefox","google-chrome","brave","opera","vivaldi","midori","falkon",
+        "waterfox","palemoon","seamonkey","epiphany","links","lynx","w3m", "chromium",NULL};
+    char **browsers = default_browsers;
+    if (argc > 1)
+        browsers = argv+1;
     for (char **browser = browsers; *browser != NULL; browser++)
         execlp(*browser, *browser, url, NULL);
 
