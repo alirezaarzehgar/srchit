@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main() {
+int main(int argc, char **argv) {
     Display *display = XOpenDisplay(0);
     if (!display) {
         perror("failed to open X11 display");
@@ -26,6 +26,11 @@ int main() {
 
     char url[BUFSIZ];
     sprintf(url, "https://www.google.com/search?q=%s", selected_data);
+
+    if (argc > 1) {
+        for (char **browser = argv; *browser != NULL; browser++)
+            execlp(*browser, *browser, url, NULL);
+    }
 
     char *browsers[] = {
         "firefox","google-chrome","brave","opera","vivaldi",
