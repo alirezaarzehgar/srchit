@@ -12,3 +12,11 @@ Adding Wayland support is planned for the future.
 # make install
 # make uninstall
 ```
+
+# Better solution!
+This code is actually useless untill you can utilize BASH and `xclip`. Install `xclip` and save 40 lines of C codes.
+Following code definitely is simpler and better than srchit.
+
+```bash
+firefox "https://www.google.com/search?q=$(xclip -selection primary -out)"
+```
